@@ -13,8 +13,9 @@ public class Withdrawal extends Transaction{
 	private CashDispenser cashDispenser;//ATM's cash dispenser
 	
 	//no-argument constructor
-	public Withdrawal(){
-		
+	public Withdrawal(int accountNumber, Screen screen, BankDatabase bankDatabase, double amount){
+		super(accountNumber, screen, bankDatabase);
+		this.amount = amount;
 	}
 	
 	//operation

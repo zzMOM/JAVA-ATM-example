@@ -4,6 +4,9 @@
  * @author weiwu
  *
  */
+
+import java.util.Scanner;
+
 public class Keypad {
 	//no attributes have been specified yet
 	
@@ -14,7 +17,7 @@ public class Keypad {
 	
 	//operations
 	public int getInput(){
-		
-		return 0;
+		Scanner keypad = new Scanner(System.in);
+		return keypad.nextInt();
 	}
 }

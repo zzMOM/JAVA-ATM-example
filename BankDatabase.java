@@ -25,8 +25,19 @@ public class BankDatabase {
 			//database output
 			/*System.out.println(accountDatabase.get(number).getUserAccountNumber() + " " + accountDatabase.get(number).getPIN()
 					+ " " + accountDatabase.get(number).getAvailableBalance() + " " + accountDatabase.get(number).getTotalBalance());*/
-		}
-			
+		}	
+	}
+	
+	//check user account number
+	public boolean authenticateUser(int accountNumber){
+		return accountDatabase.containsKey(accountNumber);
+	}
+	
+	//check pin
+	public boolean validatePIN(int accountNumber, int pin){
+		int p;
+		p = accountDatabase.get(accountNumber).getPIN();
+		return (p == pin);
 	}
 	
 }
