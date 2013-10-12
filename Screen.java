@@ -69,13 +69,17 @@ public class Screen {
 		System.out.println("This is your account balance!");
 		System.out.println("Account available balance is: " + availableBalance);
 		System.out.println("Account total balance is: " + totalBalance);
-		System.out.println("1- Return to main menu");
-		System.out.println("2- Exit");
+
 	}
 	
 	public void displayDepositMenu(){
 		System.out.println("Deposit Menu");
 		System.out.println("Enter deposit amount: ");
 		System.out.println("Type 0 to cancel transaction!\n");
+	}
+	
+	public void afterTransactionChoice(){
+		System.out.println("1- Return to main menu");
+		System.out.println("2- Exit");
 	}
 }
