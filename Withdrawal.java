@@ -22,4 +22,8 @@ public class Withdrawal extends Transaction{
 	public void execute(){
 		
 	}
+	
+	public double getAvailableBalance(int accountNumber, BankDatabase bankDatabase){
+		return 0;
+	}
 }

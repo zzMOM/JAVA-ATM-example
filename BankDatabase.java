@@ -40,4 +40,9 @@ public class BankDatabase {
 		return (p == pin);
 	}
 	
+	//get balance
+	public double getAvailabeBalance(int accountNumber){
+		return (accountDatabase.get(accountNumber).getAvailableBalance());
+	}
+	
 }

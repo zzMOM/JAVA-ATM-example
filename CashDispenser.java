@@ -15,7 +15,10 @@ public class CashDispenser {
 	
 	//operations
 	public boolean isSufficientCashAvailable(double amount){
-		
-		return false;
+		return (count >= amount);
+	}
+	
+	public void dispenseCash(double amount){
+		count -= amount;
 	}
 }

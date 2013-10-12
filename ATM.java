@@ -29,6 +29,7 @@ public class ATM {
 		//build bank database and create account records for database
 		bankDatabase = new BankDatabase();
 		bankDatabase.createBankDatabase();
+		
 				
 		while(true){
 			//ATM screen display weclcome message.
@@ -80,19 +81,57 @@ public class ATM {
 	}
 
 	public void balanceAction(int accountNumber){
-		balanceInquiry = new BalanceInquiry();
+		balanceInquiry = new BalanceInquiry(accountNumber, screen, bankDatabase);
 		balanceInquiry.execute();
 		
-		//screen show account balance
-		screen.displayBalanceMenu(availableBalance, totalBalance);
+		
 	}
 	
 	public void withdrawalAction(int accountNumber){
-		withdrawal = new Withdrawal(accountNumber, screen, bankDatabase, amoumt);
-		withdrawal.execute();
+		double amount = 0;
+		
+		//create cash dispenser
+		CashDispenser cashDispenser = new CashDispenser();
+		
+		//screen display withdrawal menu
+		screen.displayWithdrawalMenu();
+		
+		//keypad enter choice
+		int choice = keypad.getInput();
+		
+		//Five chances for the user to enter correct amount
+		for(int i = 0; i < 5; i++){
+			//choice value to amount
+			switch(choice){
+			case 1: amount = 20;
+			case 2: amount = 40;
+			case 3: amount = 60;
+			case 4: amount = 100;
+			case 5: amount = 200;
+			case 6: break;
+			default: break;
+			}
+			withdrawal = new Withdrawal(accountNumber, screen, bankDatabase, amount);
+			
+			//check availabe cash in cash dispenser
+			if(!cashDispenser.isSufficientCashAvailable(amount)){
+				screen.insufficientCashMessage();
+				break;
+			}
+			
+			//check available amount in account
+			if(bankDatabase.getAvailabeBalance(accountNumber) >= amount){
+				withdrawal.execute();
+			} else {
+				screen.accountBalanceErrorMessage();
+			}
+		}
+		
 	}
 	
 	public void depositAction(int accountNumber){
+		//create deposit slot
+		DepositSlot depositSlot = new DepositSlot();
 		deposit = new Deposit();
 		deposit.execute();
 	}
