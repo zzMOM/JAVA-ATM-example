@@ -7,7 +7,7 @@ public class Deposit extends Transaction{
 	private DepositSlot depositSlot;
 	
 	//no-argument constructor
-	public Deposit(int accountNumber, Screen screen, BankDatabase bankDatabase, double amount){
+	public Deposit(int accountNumber, Screen screen, BankDatabase bankDatabase){
 		super(accountNumber, screen, bankDatabase);
 		this.amount = amount;
 		
@@ -20,6 +20,27 @@ public class Deposit extends Transaction{
 		keypad = new Keypad();
 		
 		//screen display deposit menu
-		super.getScreen()
+		super.getScreen().displayDepositMenu();
+		
+		//keypad enter choice
+		int choice = keypad.getInput();
+		
+			//user enter amount
+			if(choice > 0){
+				amount = choice;
+			} else {
+				return;
+			}
+					
+			//update total amount
+			int accountNumber = super.getAccountNumber();
+			double currentTotalBalance = super.getBankDatabase().getTotalBalance(accountNumber) ;
+			super.getBankDatabase().debit(accountNumber, currentTotalBalance + amount);
+			//screen display withdrawal menu
+			super.getScreen().displayDepositMenu();
+			
+			//keypad enter choice
+			choice = keypad.getInput();
+			}
 	}
-}
+
