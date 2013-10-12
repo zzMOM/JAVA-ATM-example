@@ -44,5 +44,21 @@ public class BankDatabase {
 	public double getAvailabeBalance(int accountNumber){
 		return (accountDatabase.get(accountNumber).getAvailableBalance());
 	}
+	public double getTotalBalance(int accountNumber){
+		return (accountDatabase.get(accountNumber).getTotalBalance());
+	}
 	
+	//credit
+	public void credit(int accountNumber, double amount){
+		double currentAvailableBalance = accountDatabase.get(accountNumber).getAvailableBalance();
+		double currentTotalBalance = accountDatabase.get(accountNumber).getTotalBalance();
+		accountDatabase.get(accountNumber).setAvailableBalance(currentAvailableBalance - amount);
+		accountDatabase.get(accountNumber).setTotalBalance(currentTotalBalance - amount);
+	}
+	
+	//debit
+	public void debit(int accountNumber, double amount){
+		double currentTotalBalance = accountDatabase.get(accountNumber).getTotalBalance();
+		accountDatabase.get(accountNumber).setTotalBalance(currentTotalBalance + amount);
+	}
 }

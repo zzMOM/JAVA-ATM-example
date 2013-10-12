@@ -57,11 +57,14 @@ public class ATM {
 						int choice = keypad.getInput();
 						
 						switch(choice){
-							case 1: balanceAction(accountNumber);//view account balance
+							case 1: BalanceInquiry bi = new BalanceInquiry(accountNumber, screen, bankDatabase);//view account balance
+									bi.execute();
 									break;
-							case 2: withdrawalAction(accountNumber);//withdrawal cash
+							case 2: Withdrawal w = new Withdrawal(accountNumber, screen, bankDatabase, amount);;//withdrawal cash
+									w.execute();
 									break;
-							case 3: depositAction(accountNumber);//deposit funds
+							case 3: Deposit d =  new Deposit(accountNumber, screen, bankDatabase, amount);//deposit funds
+									d.excute();
 									break;
 							case 4: break;//exit
 							default: break;//any other keys to exit
@@ -80,60 +83,4 @@ public class ATM {
 		} 
 	}
 
-	public void balanceAction(int accountNumber){
-		balanceInquiry = new BalanceInquiry(accountNumber, screen, bankDatabase);
-		balanceInquiry.execute();
-		
-		
-	}
-	
-	public void withdrawalAction(int accountNumber){
-		double amount = 0;
-		
-		//create cash dispenser
-		CashDispenser cashDispenser = new CashDispenser();
-		
-		//screen display withdrawal menu
-		screen.displayWithdrawalMenu();
-		
-		//keypad enter choice
-		int choice = keypad.getInput();
-		
-		//Five chances for the user to enter correct amount
-		for(int i = 0; i < 5; i++){
-			//choice value to amount
-			switch(choice){
-			case 1: amount = 20;
-			case 2: amount = 40;
-			case 3: amount = 60;
-			case 4: amount = 100;
-			case 5: amount = 200;
-			case 6: break;
-			default: break;
-			}
-			withdrawal = new Withdrawal(accountNumber, screen, bankDatabase, amount);
-			
-			//check availabe cash in cash dispenser
-			if(!cashDispenser.isSufficientCashAvailable(amount)){
-				screen.insufficientCashMessage();
-				break;
-			}
-			
-			//check available amount in account
-			if(bankDatabase.getAvailabeBalance(accountNumber) >= amount){
-				withdrawal.execute();
-			} else {
-				screen.accountBalanceErrorMessage();
-			}
-		}
-		
-	}
-	
-	public void depositAction(int accountNumber){
-		//create deposit slot
-		DepositSlot depositSlot = new DepositSlot();
-		deposit = new Deposit();
-		deposit.execute();
-	}
-	
 }

@@ -48,20 +48,4 @@ public class Account {
 		return totalBalance;
 	}
 	
-	//activities
-	public boolean validatePIN(int userAccountNumber, int pin){
-		return false;
-	}
-	
-	public boolean authenticateUser(int userAccountNumber){
-		return false;
-	}
-	
-	public void credit(int userAccountNumber, double amount){
-		
-	}
-	
-	public void debit(int userAccountNumber, double amount){
-		
-	}
 }

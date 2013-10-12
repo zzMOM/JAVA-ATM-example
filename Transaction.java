@@ -3,8 +3,8 @@
 public abstract class Transaction {
 	//attributes
 	private int accountNumber;
-	private Screen screen;
-	private BankDatabase bankDatabase;
+	private Screen screen = new Screen();
+	private BankDatabase bankDatabase = new BankDatabase();
 	
 	//no-argument constructor invoked by subclasses using super()
 	public Transaction(int accountNumber, Screen screen, BankDatabase bankDatabase){
