@@ -1,12 +1,13 @@
 
-public class BalanceInquiry {
+public class BalanceInquiry extends Transaction {
 
-	//references to associated objects
-	private BankDatabase bankDatabase;
-	private Screen screen;
-	
 	//no-argument constructor
 	public BalanceInquiry(){
+		
+	}
+	
+	//operations
+	public void execute(){
 		
 	}
 }

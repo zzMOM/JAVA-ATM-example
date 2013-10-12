@@ -16,4 +16,12 @@ public class Screen {
 	public void displayMessage(String message){
 		
 	}
+	
+	public void displayWelcome(){
+		System.out.print
+	}
+	
+	public void displayMainMenu(){
+		
+	}
 }

@@ -5,16 +5,12 @@
  * @author weiwu
  *
  */
-public class Withdrawal {
+public class Withdrawal extends Transaction{
 	//attribute
-	private int accountNumber;
 	private double amount;
-	
 	//references to associated objects
-	private Screen screen;//ATM's screen
 	private Keypad keypad;//ATM's keypad
 	private CashDispenser cashDispenser;//ATM's cash dispenser
-	private BankDatabase bankDatabase;//account info database
 	
 	//no-argument constructor
 	public Withdrawal(){
