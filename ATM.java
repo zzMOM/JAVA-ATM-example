@@ -21,7 +21,7 @@ public class ATM {
 	public void excute(){
 		screen = new Screen();
 		int accountNumber, pin;
-		double amount;
+		double amount = 0;
 		
 		//create new keypad object
 		keypad = new Keypad();
@@ -31,8 +31,8 @@ public class ATM {
 		bankDatabase.createBankDatabase();
 		
 				
-		while(true){
-			//ATM screen display weclcome message.
+		while(true){//------------------------------------------------------welcome menu
+			//ATM screen display welcome message.
 			screen.displayWelcome();
 			
 			//ATM wait user to input from keypad ( user keyboard instead)
@@ -43,6 +43,9 @@ public class ATM {
 				//authenticate user then input PIN
 				screen.pinMessage();
 				
+				//if user choice exit, return to welcome menu
+				int doexit = 0;
+				
 				//user has three time to enter validate pin
 				for (int i = 0; i < 3; i++){
 					//keypad enter PIN
@@ -50,25 +53,44 @@ public class ATM {
 					
 					//validate pin
 					if(bankDatabase.validatePIN(accountNumber, pin)){
-						//validate pin then go to main menu
-						screen.displayMainMenu();
-						
-						//keypad enter choice, screen show different menu
-						int choice = keypad.getInput();
-						
-						switch(choice){
-							case 1: BalanceInquiry bi = new BalanceInquiry(accountNumber, screen, bankDatabase);//view account balance
-									bi.execute();
-									break;
-							case 2: Withdrawal w = new Withdrawal(accountNumber, screen, bankDatabase, amount);;//withdrawal cash
-									w.execute();
-									break;
-							case 3: Deposit d =  new Deposit(accountNumber, screen, bankDatabase, amount);//deposit funds
-									d.excute();
-									break;
-							case 4: break;//exit
-							default: break;//any other keys to exit
-						}
+						while(true){//----------------------------------------main menu
+							//validate pin then go to main menu
+							screen.displayMainMenu();
+							
+							//keypad enter choice, screen show different menu
+							int choice = keypad.getInput();
+										
+							
+							switch(choice){
+								case 1: BalanceInquiry bi = new BalanceInquiry(accountNumber, screen, bankDatabase);//view account balance
+										bi.execute();
+										break;
+								case 2: Withdrawal w = new Withdrawal(accountNumber, screen, bankDatabase);;//withdrawal cash
+										w.execute();
+										break;
+								case 3: Deposit d =  new Deposit(accountNumber, screen, bankDatabase);//deposit funds
+										d.execute();
+										break;
+								case 4: doexit = 1;
+										break;//exit
+								default:doexit = 1; 
+										break;//any other keys to exit
+							}
+							
+							if(doexit == 1){
+								break;
+							}
+							
+							//after transaction choose to main menu or exit
+							screen.afterTransactionChoice();
+							
+							choice = keypad.getInput();
+							//if choice is 1 or other, go back to main menu; if choice is 2, exit
+							if(choice == 2){
+								break;
+							}
+							
+						}//-----------------------------------------------------end main menu
 						
 					} else {
 						//screen displays pin error message and ask user to enter PIN
@@ -80,7 +102,7 @@ public class ATM {
 				//show account error message, go to welcome menu
 				screen.accountErrorMessage();
 			}
-		} 
+		}//-----------------------------------------------------------------------end welcome menu 
 	}
 
 }
