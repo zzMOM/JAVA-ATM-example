@@ -40,6 +40,11 @@ public class Screen {
 	
 	public void insertEnvelopeMessage(){
 		System.out.println("Please insert your deposit envelope into the deposit slot!\n");
+		System.out.println("Enter 0 when finish!\n");
+	}
+	
+	public void noDepositEnvelopeMessage(){
+		System.out.println("Did not get deposit envelop!\n");
 	}
 	
 	public void displayWelcome(){
