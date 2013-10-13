@@ -9,7 +9,6 @@ public class Deposit extends Transaction{
 	//no-argument constructor
 	public Deposit(int accountNumber, Screen screen, BankDatabase bankDatabase){
 		super(accountNumber, screen, bankDatabase);
-		this.amount = amount;
 		
 	}
 	
@@ -31,16 +30,19 @@ public class Deposit extends Transaction{
 			} else {
 				return;
 			}
-					
-			//update total amount
-			int accountNumber = super.getAccountNumber();
-			double currentTotalBalance = super.getBankDatabase().getTotalBalance(accountNumber) ;
-			super.getBankDatabase().debit(accountNumber, currentTotalBalance + amount);
-			//screen display withdrawal menu
-			super.getScreen().displayDepositMenu();
 			
-			//keypad enter choice
+			//reminder user to insert deposit envelop into the deposit slot
+			super.getScreen().insertEnvelopeMessage();
 			choice = keypad.getInput();
+			
+			if(depositSlot.isEnvelopeReceived(choice)){
+				//update total amount
+				int accountNumber = super.getAccountNumber();
+				double currentTotalBalance = super.getBankDatabase().getTotalBalance(accountNumber) ;
+				super.getBankDatabase().debit(accountNumber, currentTotalBalance + amount);
+			} else {
+				super.getScreen().noDepositEnvelopeMessage();
 			}
 	}
+}
 
