@@ -7,7 +7,11 @@ public class DepositSlot {
 	}
 	
 	//operations
-	public boolean isEnvelopeReceived(){
-		return false;
+	public boolean isEnvelopeReceived(int x){
+		if(x == 0){
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
